@@ -8,6 +8,7 @@ export class App extends Component {
 
     this.state = {
       task: [],
+      input: "",
     };
 
     this.addTask = this.addTask.bind(this);
@@ -25,6 +26,7 @@ export class App extends Component {
     task.push(input);
     console.log(task);
     this.setState({ input: "" });
+    document.querySelector("#task").value = "";
   }
 
   render() {
