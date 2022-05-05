@@ -6,7 +6,11 @@ export class Overview extends Component {
       <div>
         <ul>
           {this.props.task.map((item, index) => {
-            return <li key={index}>{item}</li>;
+            return (
+              <li key={index}>
+                {index}. {item}
+              </li>
+            );
           })}
         </ul>
       </div>
