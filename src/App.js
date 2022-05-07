@@ -13,6 +13,7 @@ export class App extends Component {
 
     this.addTask = this.addTask.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   onChange(e) {
@@ -29,6 +30,10 @@ export class App extends Component {
     document.querySelector("#task").value = "";
   }
 
+  deleteTask(name) {
+    this.setState({ task: this.state.task.filter((el) => el !== name) });
+  }
+
   render() {
     return (
       <div>
@@ -43,7 +48,7 @@ export class App extends Component {
           />
           <button type="submit">Add Task</button>
         </form>
-        <Overview task={this.state.task} />
+        <Overview task={this.state.task} deleteTask={this.deleteTask} />
       </div>
     );
   }
