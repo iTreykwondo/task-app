@@ -1,57 +1,44 @@
-import { Component } from "react";
+import { useState } from "react";
 import "./App.css";
 import Overview from "./components/Overview";
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
+export function App() {
+  const [task, setTask] = useState([]);
+  const [input, setInput] = useState("");
 
-    this.state = {
-      task: [],
-      input: "",
-    };
-
-    this.addTask = this.addTask.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.deleteTask = this.deleteTask.bind(this);
-  }
-
-  onChange(e) {
+  function onChange(e) {
     e.preventDefault();
-    this.setState({ input: e.target.value });
+    setInput(e.target.value);
   }
 
-  addTask(e) {
-    const { task, input } = this.state;
+  function addTask(e) {
     e.preventDefault();
     task.push(input);
     console.log(task);
-    this.setState({ input: "" });
+    setInput("");
     document.querySelector("#task").value = "";
   }
 
-  deleteTask(name) {
-    this.setState({ task: this.state.task.filter((el) => el !== name) });
+  function deleteTask(name) {
+    setTask(task.filter((el) => el !== name));
   }
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.addTask}>
-          <input
-            onChange={this.onChange}
-            type="text"
-            name="task"
-            id="task"
-            placeholder="Enter a task"
-            required
-          />
-          <button type="submit">Add Task</button>
-        </form>
-        <Overview task={this.state.task} deleteTask={this.deleteTask} />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <form onSubmit={addTask}>
+        <input
+          onChange={onChange}
+          type="text"
+          name="task"
+          id="task"
+          placeholder="Enter a task"
+          required
+        />
+        <button type="submit">Add Task</button>
+      </form>
+      <Overview task={task} deleteTask={deleteTask} />
+    </div>
+  );
 }
 
 export default App;
