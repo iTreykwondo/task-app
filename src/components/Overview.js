@@ -1,31 +1,32 @@
-import React, { Component } from "react";
+import React from "react";
+import "../App.css";
 
-export class Overview extends Component {
-  deleteTask(name) {
-    this.props.deleteTask(name);
+export function Overview(props) {
+  function deleteTask(name) {
+    props.deleteTask(name);
   }
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.props.task.map((item, index) => {
-            return (
-              <li key={index}>
-                {index}. {item}
-                <button
-                  onClick={() => {
-                    this.deleteTask(item);
-                  }}
-                >
-                  Delete Task
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-  }
+
+  return (
+    <div className="tasks">
+      <ul>
+        {props.task.map((item, index) => {
+          return (
+            <li key={index}>
+              {index}. {item}
+              <button
+                className="delete"
+                onClick={() => {
+                  deleteTask(item);
+                }}
+              >
+                Delete Task
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 }
 
 export default Overview;
